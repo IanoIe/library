@@ -19,7 +19,7 @@
 <body>
 
    <header>
-         <h1> Welcome To Library </h1>
+         <h1> Welcome Page Admin </h1>
    </header>
     
     <div class="container my-5">
@@ -30,17 +30,17 @@
                     <th>Category</th>
                     <th>Descriptions</th>
                     <th>Author</th>
+                    <th>Stok</th>
                     <th>Action</th>
                     <th>Request</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                     $sql = "SELECT books.title, books.category, books.descriptions, authors.fullname
-                             FROM books, authors
-                             WHERE authors.id = books.id;";
+                     $sql = "SELECT books.id, books.title, books.category, books.descriptions, authors.fullname, books.stock
+                     FROM books
+                     JOIN authors ON authors.id = books.id";             
                      $stmt = $pdo->query($sql);
-
                      if (!$stmt) {
                         die("Invalid query: ");
                      }
@@ -51,6 +51,7 @@
                                   <td>$ligne[category]</td>
                                   <td>$ligne[descriptions]</td>
                                   <td>$ligne[fullname]</td>
+                                  <td>$ligne[stock]</td>
                                   <td>
                                       <a class='btn btn-primary btn-sm' href='edit.php?id=$ligne[id]'>Edit</a>
                                       <a class='btn btn-danger btn-sm' href='delete.php?id=$ligne[id]'>Delete<br></a>
