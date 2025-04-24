@@ -26,8 +26,13 @@
                 $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 if ($user) {
                     if (password_verify($password, $user["pass"])){
-                        header("Location: index.php");
-                        die();
+                        if ($user["email"] == "ma@gmail.com") {
+                            header("Location: indexAdmin.php");
+                            die();
+                        } else {
+                            header("Location: index.php");
+                            die();
+                        }
                     }else {
                         echo "<div class='alert alert-danger'>Password does not match</div>";
                     }
